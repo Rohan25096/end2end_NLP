@@ -1,8 +1,0 @@
-[ 2026-06-02 23:23:06,357 ] 25 root - INFO - Logging has started
-[ 2026-06-02 23:23:11,724 ] 22 root - INFO - Entered data injestion method or component.
-[ 2026-06-02 23:23:11,743 ] 28 root - INFO - Reading the dataset
-[ 2026-06-02 23:23:11,762 ] 37 root - INFO - Injestion of Data is completed
-[ 2026-06-02 23:23:11,789 ] 32 root - INFO - Tokenization in progress
-[ 2026-06-02 23:23:11,818 ] 40 root - INFO - Converting text to sequences
-[ 2026-06-02 23:23:11,840 ] 46 root - INFO - Saving tokenizer
-[ 2026-06-02 23:23:11,905 ] 54 root - INFO - Saving metadata

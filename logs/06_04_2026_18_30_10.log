@@ -1,0 +1,16 @@
+[ 2026-06-04 18:30:10,961 ] 25 root - INFO - Logging has started
+[ 2026-06-04 18:30:17,172 ] 23 root - INFO - Entered data injestion method or component.
+[ 2026-06-04 18:30:17,206 ] 29 root - INFO - Reading the dataset
+[ 2026-06-04 18:30:17,250 ] 38 root - INFO - Injestion of Data is completed
+[ 2026-06-04 18:30:17,301 ] 32 root - INFO - Tokenization in progress
+[ 2026-06-04 18:30:17,556 ] 41 root - INFO - Converting text to sequences
+[ 2026-06-04 18:30:17,738 ] 47 root - INFO - Saving tokenizer
+[ 2026-06-04 18:30:18,058 ] 56 root - INFO - Saving metadata as 15213 66 6
+[ 2026-06-04 18:30:18,066 ] 69 root - INFO - Splitting train and test data
+[ 2026-06-04 18:30:18,076 ] 72 root - INFO - Building Model
+[ 2026-06-04 18:30:18,121 ] 61 root - INFO - LSTM architecture created
+[ 2026-06-04 18:30:18,121 ] 75 root - INFO - Compiling Model
+[ 2026-06-04 18:30:18,135 ] 88 root - INFO - Training model
+[ 2026-06-04 18:34:53,587 ] 113 root - INFO - Evaluating scores
+[ 2026-06-04 18:34:57,996 ] 115 root - INFO - Test accuracy 0.9024999737739563 and Test loss 0.3831908106803894
+[ 2026-06-04 18:34:59,258 ] 147 root - INFO - Training history saved

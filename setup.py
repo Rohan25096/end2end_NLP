@@ -18,7 +18,7 @@ setup(
     name='src',
     packages=find_packages(),
     version='0.1.0',
-    description='The project is sample project which helps predict an DDos attack.',
+    description='The project is sample project which helps predict class of emotion.',
     install_requires = get_requirements('requirements.txt'),
     author='Rohan Sahoo',
     license='',

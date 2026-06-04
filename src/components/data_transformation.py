@@ -36,6 +36,7 @@ class DataTransformation:
             vocab_size = len(T.word_index) + 1
             sentences_list = X_train.tolist()
             max_length = max(len(word.split()) for word in sentences_list)
+            num_classes = int(y_train.value_counts().count())
             
             logging.info("Converting text to sequences")
             sequences = T.texts_to_sequences(sentences_list)
@@ -48,15 +49,17 @@ class DataTransformation:
 
             metadata = {
                 "vocab_size": vocab_size,
-                "max_length": max_length
+                "max_length": max_length,
+                "num_classes": num_classes
             }
 
-            logging.info("Saving metadata")
+            logging.info(f"Saving metadata as {vocab_size} {max_length} {num_classes}")
             save_object(self.preprocessing_config.metadata_path, metadata)
             
             return(
                 padded_sequences,
-                y_train.values
+                y_train.values,
+                metadata
             )
         
         except Exception as e:
@@ -69,7 +72,7 @@ class DataTransformation:
 
             max_length = metadata['max_length']
 
-            sequence = T.text_to_sequences(sentence)
+            sequence = T.texts_to_sequences(sentence)
             padded_sequence = pad_sequences(sequence, maxlen=max_length, padding='pre')
 
             return padded_sequence

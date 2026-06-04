@@ -7,6 +7,7 @@ from src.logger import logging
 from dataclasses import dataclass
 
 from src.components.data_transformation import DataTransformation, DataTransformationConfig
+from src.components.model_trainer import ModelTrainer, ModelTrainerConfig
 
 @dataclass
 class DataInjestionConfig:
@@ -21,9 +22,9 @@ class DataInjestion:
     def initiate_data_injestion(self):
         logging.info('Entered data injestion method or component.')
 
-        train_df = pd.read_csv(r'C:\Users\rohan\OneDrive\Desktop\jupytr_proj\emotion-detection\test.csv')
+        train_df = pd.read_csv(r'C:\Users\rohan\OneDrive\Desktop\jupytr_proj\emotion-detection\train.csv')
         test_df = pd.read_csv(r'C:\Users\rohan\OneDrive\Desktop\jupytr_proj\emotion-detection\test.csv')
-        validation_df = pd.read_csv(r'C:\Users\rohan\OneDrive\Desktop\jupytr_proj\emotion-detection\test.csv')
+        validation_df = pd.read_csv(r'C:\Users\rohan\OneDrive\Desktop\jupytr_proj\emotion-detection\validation.csv')
 
         logging.info('Reading the dataset')
 
@@ -49,4 +50,7 @@ if __name__=="__main__":
     train_path,test_path = obj.initiate_data_injestion()
 
     data_transform = DataTransformation()
-    X_train_arr, y_train_arr = data_transform.initiate_train_data_transform(train_path)
+    padded_sequences, emotion_class_arr, metadata = data_transform.initiate_train_data_transform(train_path)
+
+    model_trainer = ModelTrainer()
+    Model = model_trainer.initiate_model_trainer(padded_sequences, emotion_class_arr)
