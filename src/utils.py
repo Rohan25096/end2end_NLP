@@ -28,3 +28,14 @@ def load_object(file_path):
         
     except Exception as e:
         raise CustomException(e, sys)
+    
+def label_mapper(pred):
+    label_map = {
+        0: "sadness",
+        1: "joy",
+        2: "love",
+        3: "anger",
+        4: "fear",
+        5: "surprise"
+    }
+    return label_map[pred]

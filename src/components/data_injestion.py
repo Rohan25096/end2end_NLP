@@ -8,6 +8,7 @@ from dataclasses import dataclass
 
 from src.components.data_transformation import DataTransformation, DataTransformationConfig
 from src.components.model_trainer import ModelTrainer, ModelTrainerConfig
+from src.pipeline.predict_pipeline import PredictPipelineConfig, PredictPipeline
 
 @dataclass
 class DataInjestionConfig:

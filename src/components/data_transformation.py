@@ -65,10 +65,10 @@ class DataTransformation:
         except Exception as e:
             raise CustomException(e, sys)
         
-    def initiate_data_transform(self,sentence):
+    def initiate_data_transform(self, sentence, tokenizer_path, metadata_path):
         try:
-            T = load_object(file_path=self.preprocessing_config.tokenizer_path)
-            metadata = load_object(file_path=self.preprocessing_config.metadata_path)
+            T = load_object(file_path=tokenizer_path)
+            metadata = load_object(file_path=metadata_path)
 
             max_length = metadata['max_length']
 

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .hero {
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .hero-content {
+            padding: 20px 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            color: #cbd5e1;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: 54px;
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #cbd5e1;
+            margin-bottom: 28px;
+            max-width: 620px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 24px;
+            border-radius: 14px;
+            background: #38bdf8;
+            color: #082f49;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #7dd3fc;
+            transform: translateY(-2px);
+        }
+
+        .preview-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            padding: 28px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .preview-card h3 {
+            margin-bottom: 18px;
+            font-size: 24px;
+        }
+
+        .emotion-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .emotion-chip {
+            padding: 14px 16px;
+            border-radius: 16px;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+        }
+
+        .sadness { background: #2563eb; }
+        .joy { background: #eab308; color: #1f2937; }
+        .love { background: #ec4899; }
+        .anger { background: #ef4444; }
+        .fear { background: #7c3aed; }
+        .surprise { background: #10b981; }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .emotion-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="tag">LSTM Based NLP Project</div>
+            <h1>Predict Human Emotion from Text</h1>
+            <p>
+                Enter a sentence and let your trained model classify the emotion into sadness,
+                joy, love, anger, fear, or surprise with a clean and interactive interface.
+            </p>
+            <a href="/predictdata" class="btn">Try Prediction</a>
+        </div>
+
+        <div class="preview-card">
+            <h3>Supported Emotions</h3>
+            <div class="emotion-grid">
+                <div class="emotion-chip sadness">Sadness</div>
+                <div class="emotion-chip joy">Joy</div>
+                <div class="emotion-chip love">Love</div>
+                <div class="emotion-chip anger">Anger</div>
+                <div class="emotion-chip fear">Fear</div>
+                <div class="emotion-chip surprise">Surprise</div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

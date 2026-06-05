@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Emotion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            color: #0f172a;
+            padding: 24px;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 28px;
+            align-items: start;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        .left-panel,
+        .right-panel {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #0f172a;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            border: 1px solid #cbd5e1;
+            border-radius: 18px;
+            padding: 18px;
+            font-size: 16px;
+            resize: vertical;
+            outline: none;
+            transition: 0.3s ease;
+            background: #f8fafc;
+        }
+
+        textarea:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.18);
+            background: #ffffff;
+        }
+
+        .btn-row {
+            margin-top: 18px;
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 20px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #0f172a;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1e293b;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+
+        .result-box {
+            margin-top: 24px;
+            padding: 20px;
+            border-radius: 18px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .result-title {
+            font-size: 18px;
+            margin-bottom: 14px;
+        }
+
+        .prediction-pill {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-weight: bold;
+            color: white;
+            margin-top: 8px;
+        }
+
+        .emotion-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .emotion-card {
+            padding: 14px;
+            border-radius: 16px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0.35;
+            transform: scale(1);
+            transition: 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .emotion-card.active {
+            opacity: 1;
+            transform: scale(1.03);
+            border-color: #0f172a;
+            box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+        }
+
+        .sadness { background: #2563eb; }
+        .joy { background: #eab308; color: #1f2937; }
+        .love { background: #ec4899; }
+        .anger { background: #ef4444; }
+        .fear { background: #7c3aed; }
+        .surprise { background: #10b981; }
+
+        .helper {
+            color: #64748b;
+            margin-top: 16px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .page {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .emotion-list {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .left-panel,
+            .right-panel {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="left-panel">
+            <h1>Predict Emotion from Sentence</h1>
+            <p class="subtitle">
+                Type any sentence below and your trained model will classify the dominant emotion.
+            </p>
+
+            <form action="/predictdata" method="POST">
+                <label for="sentence">Enter Sentence</label>
+                <textarea name="sentence" id="sentence" placeholder="Example: I am feeling very excited today">{{ sentence if sentence else '' }}</textarea>
+
+                <div class="btn-row">
+                    <button type="submit" class="btn btn-primary">Predict Emotion</button>
+                    <a href="/" class="btn btn-secondary">Back Home</a>
+                </div>
+            </form>
+
+            {% if prediction %}
+            <div class="result-box">
+                <div class="result-title">Prediction Result</div>
+                <div class="prediction-pill {{ prediction|lower }}">{{ prediction }}</div>
+            </div>
+            {% endif %}
+
+            <p class="helper">
+                Try sentences like: “I am very happy today”, “I feel afraid right now”, or “This was a beautiful surprise”.
+            </p>
+        </div>
+
+        <div class="right-panel">
+            <h1 style="font-size: 28px; margin-bottom: 10px;">Emotion Labels</h1>
+            <p class="subtitle" style="margin-bottom: 18px;">
+                The predicted emotion will be highlighted automatically.
+            </p>
+
+            <div class="emotion-list">
+                <div class="emotion-card sadness {% if prediction and prediction|lower == 'sadness' %}active{% endif %}">Sadness</div>
+                <div class="emotion-card joy {% if prediction and prediction|lower == 'joy' %}active{% endif %}">Joy</div>
+                <div class="emotion-card love {% if prediction and prediction|lower == 'love' %}active{% endif %}">Love</div>
+                <div class="emotion-card anger {% if prediction and prediction|lower == 'anger' %}active{% endif %}">Anger</div>
+                <div class="emotion-card fear {% if prediction and prediction|lower == 'fear' %}active{% endif %}">Fear</div>
+                <div class="emotion-card surprise {% if prediction and prediction|lower == 'surprise' %}active{% endif %}">Surprise</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
